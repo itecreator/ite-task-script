@@ -27,12 +27,12 @@ function fetchTaksInfo() {
     }).then(data => {
         if (data && data.rows && data.rows.length > 0) {
             var tasks = data.rows;
-            var refresh_time = tasks[1];
+            var refresh_time = tasks[1].refresh_time;
             var now = moment().format("X");
-            if (refresh_time < now) {
+            if (refresh_time == 0 || refresh_time < now) {
                 sendTransfer(arg);
             } else {
-                console.log("done.");
+                console.log("done.",tasks);
             }
         }
     }).catch(e => {
